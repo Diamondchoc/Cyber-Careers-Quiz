@@ -19,6 +19,7 @@ body {
     margin: 5% 3% 3% 3%;
 }
 
-.btn-lg {
+.btn-info {
     min-width: 350px;
+    font-size: 100px;
 }
