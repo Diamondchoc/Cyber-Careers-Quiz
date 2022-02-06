@@ -1,0 +1,23 @@
+.jumbotron  {
+    margin-top: 60px;
+    margin-right: 60px;
+    margin-left: 60px;
+}
+
+.jumbotron ul  {
+    padding-left: 15%;
+    padding-right: 15%;
+}
+
+.img-thumbnail > img{
+    width:100%;
+    height:100%;
+}
+
+body {
+    margin: 5% 3% 3% 3%;
+}
+
+.btn-lg {
+    min-width: 250px;
+}
