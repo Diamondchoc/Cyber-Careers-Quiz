@@ -1,7 +1,8 @@
 .jumbotron  {
     margin-top: 60px;
     margin-right: 60px;
-    margin-left: 60px;
+    margin-left: 60px;.jumbotron {
+	background-color: transparent !important;
 }
 
 .jumbotron ul  {
@@ -19,5 +20,5 @@ body {
 }
 
 .btn-lg {
-    min-width: 250px;
+    min-width: 350px;
 }
