@@ -26,7 +26,7 @@ $(document).ready(function(){
 
   $("#start-button").click(function(){
     $("#welcome-page").hide();
-    $("#question1").show();
+    $("#question1").fadeIn();
     $("#next-button").show();
     $('#next-button').prop('disabled', true);
     $('#finish-button').prop('disabled', true);
@@ -56,14 +56,14 @@ $(document).ready(function(){
     if ($currentQuestion === 10) {
       $("#next-button").hide();
       $("#finish-button").show();
+      $('#finish-button').prop('disabled', true);
     }
 
-    $("#"+$nextQuestion+"").show();
+    $("#"+$nextQuestion+"").fadeIn();
     $('#next-button').prop('disabled', true);
-    $('#finish-button').prop('disabled', true);
   });
 
-  $(".form-check").click(function () {
+  $(".form-check").change(function () {
     $('#next-button').prop('disabled', false);
     $('#finish-button').prop('disabled', false);
   });
@@ -83,40 +83,49 @@ $(document).ready(function(){
   }
 
   function determineCareer($techCount, $processCount, $peopleCount) {
-    if ($techCount >= 8) {
-      $("#tech-page").show();
+    if (($techCount >= 8)
+      || ($techCount === 6 && $processCount === 2 && $peopleCount === 2)
+      || ($techCount === 7 && $processCount === 2 && $peopleCount === 1)
+      || ($techCount === 7 && $processCount === 1 && $peopleCount === 2)) {
+      $("#tech-page").fadeIn();
     }
 
-    if ($processCount >= 8) {
-      $("#process-page").show();
+    if (($processCount >= 8)
+      || ($techCount === 2 && $processCount === 6 && $peopleCount === 2)
+      || ($techCount === 2 && $processCount === 7 && $peopleCount === 1)
+      || ($techCount === 1 && $processCount === 7 && $peopleCount === 2)) {
+      $("#process-page").fadeIn();
     }
 
-    if ($peopleCount >= 8) {
-      $("#people-page").show();
+    if (($peopleCount >= 8)
+      || ($techCount === 2 && $processCount === 2 && $peopleCount === 6)
+      || ($techCount === 2 && $processCount === 1 && $peopleCount === 7)
+      || ($techCount === 1 && $processCount === 2 && $peopleCount === 7)) {
+      $("#people-page").fadeIn();
     }
 
     if (($techCount >= 5 && $processCount >= 3) || ($processCount >= 5 && $techCount >= 3)) {
-      $("#tech-process-page").show();
+      $("#tech-process-page").fadeIn();
     }
 
     if (($techCount >= 5 && $peopleCount >= 3) || ($peopleCount >= 5 && $techCount >= 3)) {
-      $("#tech-people-page").show();
+      $("#tech-people-page").fadeIn();
     }
 
     if (($peopleCount >= 5 && $processCount >= 3) || ($processCount >= 5 && $peopleCount >= 3)) {
-      $("#process-people-page").show();
+      $("#process-people-page").fadeIn();
     }
 
     if ($peopleCount === 4 && $processCount === 3 && $techCount === 3) {
-      $("#consultant-page").show();
+      $("#consultant-page").fadeIn();
     }
 
     if ($processCount === 4 && $peopleCount === 3 && $techCount === 3) {
-      $("#consultant-page").show();
+      $("#consultant-page").fadeIn();
     }
 
     if ($techCount === 4 && $processCount === 3 && $peopleCount === 3) {
-      $("#consultant-page").show();
+      $("#consultant-page").fadeIn();
     }
   }
 });
