@@ -28,7 +28,8 @@ $(document).ready(function(){
     $("#welcome-page").hide();
     $("#question1").show();
     $("#next-button").show();
-    // $('#next-button').prop('disabled', true);
+    $('#next-button').prop('disabled', true);
+    $('#finish-button').prop('disabled', true);
   });
 
   $("#finish-button").click(function(){
@@ -41,6 +42,47 @@ $(document).ready(function(){
     $("#question10").hide();
     $("#finish-button").hide();
 
+    determineCareer($techCount, $processCount, $peopleCount);
+  });
+
+  $("#next-button").click(function (){
+    const $question = "question" + $currentQuestion;
+    $("#"+$question+"").hide();
+
+    const $nextQuestionNumber = $currentQuestion + 1
+    const $nextQuestion = "question" + $nextQuestionNumber;
+    $currentQuestion = $nextQuestionNumber;
+
+    if ($currentQuestion === 10) {
+      $("#next-button").hide();
+      $("#finish-button").show();
+    }
+
+    $("#"+$nextQuestion+"").show();
+    $('#next-button').prop('disabled', true);
+    $('#finish-button').prop('disabled', true);
+  });
+
+  $(".form-check").click(function () {
+    $('#next-button').prop('disabled', false);
+    $('#finish-button').prop('disabled', false);
+  });
+
+  function updateScore($questionValue) {
+    if ($questionValue === "1") {
+      $techCount += 1;
+    }
+
+    if ($questionValue === "2") {
+      $processCount += 1;
+    }
+
+    if ($questionValue === "3") {
+      $peopleCount += 1;
+    }
+  }
+
+  function determineCareer($techCount, $processCount, $peopleCount) {
     if ($techCount >= 8) {
       $("#tech-page").show();
     }
@@ -75,36 +117,6 @@ $(document).ready(function(){
 
     if ($techCount === 4 && $processCount === 3 && $peopleCount === 3) {
       $("#consultant-page").show();
-    }
-  });
-
-  $("#next-button").click(function (){
-    const $question = "question" + $currentQuestion;
-    $("#"+$question+"").hide();
-
-    const $nextQuestionNumber = $currentQuestion + 1
-    const $nextQuestion = "question" + $nextQuestionNumber;
-    $currentQuestion = $nextQuestionNumber;
-
-    if ($currentQuestion === 10) {
-      $("#next-button").hide();
-      $("#finish-button").show();
-    }
-
-    $("#"+$nextQuestion+"").show();
-  })
-
-  function updateScore($questionValue) {
-    if ($questionValue === "1") {
-      $techCount += 1;
-    }
-
-    if ($questionValue === "2") {
-      $processCount += 1;
-    }
-
-    if ($questionValue === "3") {
-      $peopleCount += 1;
     }
   }
 });
