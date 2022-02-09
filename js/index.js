@@ -1,8 +1,9 @@
-$(document).ready(function(){
+$(document).ready(function() {
   let $currentQuestion = 1;
   let $techCount = 0;
   let $processCount = 0;
   let $peopleCount = 0;
+  let $startAgain = false;
 
   $("#next-button").hide();
   $("#question1").hide();
@@ -23,16 +24,17 @@ $(document).ready(function(){
   $("#process-people-page").hide();
   $("#consultant-page").hide();
   $("#finish-button").hide();
+  $("#start-again").hide();
 
-  $("#start-button").click(function(){
+  $("#start-button").click(function() {
     $("#welcome-page").hide();
     $("#question1").fadeIn();
-    $("#next-button").show();
+    $("#next-button").fadeIn();
     $('#next-button').prop('disabled', true);
     $('#finish-button').prop('disabled', true);
   });
 
-  $("#finish-button").click(function(){
+  $("#finish-button").click(function() {
     for (let count = 1; count <= 10; count++) {
       const $questionNumber = "question" + count.toString();
       const $questionValue = $('input[name="'+ $questionNumber +'"]:checked').val();
@@ -43,9 +45,43 @@ $(document).ready(function(){
     $("#finish-button").hide();
 
     determineCareer($techCount, $processCount, $peopleCount);
+
+    $startAgain = true;
+
+    if ($startAgain) {
+      $("#start-again").fadeIn();
+    }
   });
 
-  $("#next-button").click(function (){
+  $("#start-again").click(function () {
+    $currentQuestion = 1;
+    $techCount = 0;
+    $processCount = 0;
+    $peopleCount = 0;
+    $startAgain = false;
+
+    deselectAllAnswers();
+    hideAllOutcomePages();
+
+    $('#start-again').hide();
+    $("#welcome-page").fadeIn();
+  })
+
+  function deselectAllAnswers() {
+    $('.form-check-input').prop('checked', false);
+  }
+
+  function hideAllOutcomePages() {
+    $("#tech-page").hide();
+    $("#process-page").hide();
+    $("#people-page").hide();
+    $("#tech-process-page").hide();
+    $("#tech-people-page").hide();
+    $("#process-people-page").hide();
+    $("#consultant-page").hide();
+  }
+
+  $("#next-button").click(function () {
     const $question = "question" + $currentQuestion;
     $("#"+$question+"").hide();
 
@@ -55,7 +91,7 @@ $(document).ready(function(){
 
     if ($currentQuestion === 10) {
       $("#next-button").hide();
-      $("#finish-button").show();
+      $("#finish-button").fadeIn();
       $('#finish-button').prop('disabled', true);
     }
 
@@ -116,15 +152,9 @@ $(document).ready(function(){
       $("#process-people-page").fadeIn();
     }
 
-    if ($peopleCount === 4 && $processCount === 3 && $techCount === 3) {
-      $("#consultant-page").fadeIn();
-    }
-
-    if ($processCount === 4 && $peopleCount === 3 && $techCount === 3) {
-      $("#consultant-page").fadeIn();
-    }
-
-    if ($techCount === 4 && $processCount === 3 && $peopleCount === 3) {
+    if (($peopleCount === 4 && $processCount === 3 && $techCount === 3)
+      || ($processCount === 4 && $peopleCount === 3 && $techCount === 3)
+      || ($techCount === 4 && $processCount === 3 && $peopleCount === 3)) {
       $("#consultant-page").fadeIn();
     }
   }
